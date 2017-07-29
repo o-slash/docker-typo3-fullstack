@@ -2,8 +2,8 @@ FROM centos:7
 LABEL Name=typo3-fullstack Version=8.7
 MAINTAINER Marco De Angelis <marco.deangelis@mulgo.org>
 
-RUN yum install -y https://centos7.iuscommunity.org/ius-release.rpm && \
-    yum install -y \
+RUN yum install -y --setopt=tsflags=nodocs https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum install -y --setopt=tsflags=nodocs \
       apache \
       php71u \
       php71u-cli \
