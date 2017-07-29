@@ -15,11 +15,13 @@ RUN yum install -y --setopt=tsflags=nodocs https://centos7.iuscommunity.org/ius-
       php71u-mbstring \
       GraphicsMagick && \
     echo -e "always_populate_raw_post_data = -1;\nmax_execution_time = 240;\nmax_input_vars = 1500;\nupload_max_filesize = 10M;\npost_max_size = 10M;" > /etc/php.d/99-typo3.ini && \
-    echo -e "DocumentRoot \"/var/www/html/web\"\n<Directory \"/var/www/html/web\">\nSetEnv TYPO3_CONTEXT ${TYPO3_CONTEXT}\nEnableSendfile off\nEnableMMAP off\nOptions Indexes FollowSymLinks\nAllowOverride All\nOrder allow,deny\nAllow from all\n</Directory>" > /etc/httpd/conf.d/typo3.conf && \
+    echo -e "DocumentRoot \"/var/www/site/web\"\n<Directory \"/var/www/site/web\">\nSetEnv TYPO3_CONTEXT ${TYPO3_CONTEXT}\nEnableSendfile off\nEnableMMAP off\nOptions Indexes FollowSymLinks\nAllowOverride All\nOrder allow,deny\nAllow from all\n</Directory>" > /etc/httpd/conf.d/typo3.conf && \
+    mkdir -p /var/www/site/web && chown -R apache:apache /var/www/site/ && \
     yum clean all && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     curl -sSL https://deployer.org/deployer.phar -o /usr/bin/deployer && chmod +x /usr/bin/deployer
 
 ENV TYPO3_CONTEXT Production
 EXPOSE 80
+WORKDIR /var/www/site
 CMD httpd -DFOREGROUND
