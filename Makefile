@@ -21,5 +21,5 @@ $(VERSIONS):
 		--build-arg VCS_REF=`git rev-parse --short HEAD` \
 		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 		-t $(VENDOR)/$(IMAGE):$@-$(BUILD_DATE) ./$@
-	@docker tag $(VENDOR)/$(IMAGE) $(VENDOR)/$(IMAGE):$@-latest
-	@docker tag $(VENDOR)/$(IMAGE) $(VENDOR)/$(IMAGE):$@
+	@docker tag $(VENDOR)/$(IMAGE):$@-$(BUILD_DATE) $(VENDOR)/$(IMAGE):$@-latest
+	@docker tag $(VENDOR)/$(IMAGE):$@-$(BUILD_DATE) $(VENDOR)/$(IMAGE):$@
