@@ -1,11 +1,10 @@
 #!/bin/bash
-MOUNT_GROUP=$(stat -c "%G" .)
-MOUNT_GROUP_ID=$(stat -c "%g" .)
-MOUNT_GROUP_EXISTS=$(grep "^$MOUNT_GROUP:" /etc/group | wc -l)
+VOL_GROUP=$(stat -c "%G" .)
+VOL_GROUP_ID=$(stat -c "%g" .)
 
-if [ "$MOUNT_GROUP" != "apache" ]; then
-  groupadd -f -g $MOUNT_GROUP_ID $MOUNT_GROUP;
-  usermod -a -G "$MOUNT_GROUP" apache;
+if [ "$VOL_GROUP" != "apache" ]; then
+  groupadd -f -g $VOL_GROUP_ID $VOL_GROUP;
+  usermod -a -G "$VOL_GROUP" apache;
 fi
 
 if [ -f "./composer.json" ]; then
