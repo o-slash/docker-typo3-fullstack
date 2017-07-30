@@ -3,7 +3,7 @@ MOUNT_GROUP=$(stat -c "%G" .)
 MOUNT_GROUP_ID=$(stat -c "%g" .)
 MOUNT_GROUP_EXISTS=$(grep "^$MOUNT_GROUP:" /etc/group | wc -l)
 
-if [ "$MOUNT_GROUP" -ne "apache" ]; then
+if [ "$MOUNT_GROUP" != "apache" ]; then
   groupadd -f -g $MOUNT_GROUP_ID $MOUNT_GROUP;
   usermod -a -G "$MOUNT_GROUP" apache;
 fi
