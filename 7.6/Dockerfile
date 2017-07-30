@@ -21,22 +21,26 @@ ENV TYPO3_CONTEXT $TYPO3_CONTEXT
 
 WORKDIR /var/www/site
 
-RUN yum install -y --setopt=tsflags=nodocs https://centos7.iuscommunity.org/ius-release.rpm && \
-    yum install -y --setopt=tsflags=nodocs \
+RUN yum update -y --setopt=tsflags=nodocs && \
+    yum install -y --setopt=tsflags=nodocs --nogpgcheck https://centos7.iuscommunity.org/ius-release.rpm && \
+    yum install -y --setopt=tsflags=nodocs --nogpgcheck \
+      sudo \
       httpd \
       php56u \
       php56u-cli \
-      php56u-mysqlnd \
+      php56u-mysqli \
       php56u-gd \
       php56u-soap \
       php56u-xml \
       php56u-json \
       php56u-mbstring \
       GraphicsMagick && \
-    mkdir -p /var/www/site/web && chown -R apache:apache /var/www/site/ && \
     yum clean all && \
+    mkdir -p /var/www/site/web && chown -R apache:apache /var/www/site && chmod -R ugo+rwX,o-w /var/www/site && \
+    mkdir -p /var/www/.composer && chown -R apache:apache /var/www/.composer && chmod -R ugo+rwX,o-w /var/www/.composer && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
-    curl -sSL https://deployer.org/releases/v4.3.1/deployer.phar -o /usr/bin/deployer && chmod +x /usr/bin/deployer
+    curl -sSL https://deployer.org/releases/v4.3.1/deployer.phar -o /usr/bin/deployer && chmod +x /usr/bin/deployer && \
+    echo "alias composer='sudo -u apache COMPOSER_HOME=/var/www/.composer composer'" >> /root/.bashrc
 
 ADD typo3.ini /etc/php.d/99-typo3.ini
 ADD typo3.conf /etc/httpd/conf.d/typo3.conf
@@ -45,3 +49,5 @@ RUN chmod +x /usr/bin/run-typo3.sh
 
 EXPOSE 80
 CMD ["run-typo3.sh" ]
+
+VOLUME ["/var/www/site"]
