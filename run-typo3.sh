@@ -1,4 +1,7 @@
 #!/bin/bash
+shopt -s expand_aliases
+source $HOME/.bashrc
+
 VOL_GROUP=$(stat -c "%G" .)
 VOL_GROUP_ID=$(stat -c "%g" .)
 
