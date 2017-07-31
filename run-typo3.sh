@@ -2,21 +2,27 @@
 shopt -s expand_aliases
 source $HOME/.bashrc
 
-VOL_GROUP=$(stat -c "%G" .)
-VOL_GROUP_ID=$(stat -c "%g" .)
+SITEDIR=/var/www/site
+APACHE_UID=48
+VOL_UID=$(stat -c "%u" $SITEDIR)
 
-if [ "$VOL_GROUP" != "apache" ]; then
-  groupadd -f -g $VOL_GROUP_ID $VOL_GROUP;
-  usermod -a -G "$VOL_GROUP" apache;
+if [ "$VOL_UID" != "$APACHE_UID" ]; then
+  usermod -u "$VOL_UID" apache
 fi
+
+chown -R apache:apache /var/www/site
+chmod -R ugo+rwX,o-w /var/www/site
+
+chown -R apache:apache /var/www/.composer
+chmod -R ugo+rwX,o-w /var/www/.composer
 
 if [ -f "./composer.json" ]; then
   if [ ! -f "./composer.lock" ]; then
-    composer install;
+    composer install
   else
-    composer update;
+    composer update
   fi
 fi
 
-rm -rf /run/httpd/* /tmp/httpd*;
-exec /usr/sbin/apachectl -DFOREGROUND;
+rm -rf /run/httpd/* /tmp/httpd*
+exec /usr/sbin/apachectl -DFOREGROUND
