@@ -37,6 +37,7 @@ RUN yum update -y --setopt=tsflags=nodocs --nogpgcheck && \
       php71u-json \
       php71u-mbstring \
       php71u-process \
+      php71u-pecl-xdebug \
       GraphicsMagick && \
     yum clean all && \
     mkdir -p /var/www/site/$TYPO3_DOCROOT && chown -R apache:apache /var/www/site && chmod -R ugo+rwX,o-w /var/www/site && \
@@ -44,7 +45,13 @@ RUN yum update -y --setopt=tsflags=nodocs --nogpgcheck && \
     mkdir -p /var/www/.composer && chown -R apache:apache /var/www/.composer && chmod -R ugo+rwX,o-w /var/www/.composer && \
     echo "alias composer='sudo -u apache COMPOSER_HOME=$COMPOSER_HOME composer'" >> /root/.bashrc && \
     curl -sSL https://deployer.org/deployer.phar -o /usr/bin/dep && chmod +x /usr/bin/dep && \
-    echo "alias dep='sudo -u apache dep'" >> /root/.bashrc
+    echo "alias dep='sudo -u apache dep'" >> /root/.bashrc && \
+    curl -sSL http://www.phing.info/get/phing-latest.phar -o /usr/bin/phing && chmod +x /usr/bin/phing && \
+    echo "alias phing='sudo -u apache phing'" >> /root/.bashrc && \
+    curl -sSL https://phar.phpunit.de/phpunit-6.2.phar -o /usr/bin/phpunit && chmod +x /usr/bin/phpunit && \
+    echo "alias phpunit='sudo -u apache phpunit'" >> /root/.bashrc && \
+    curl -sSL https://github.com/Behat/Behat/releases/download/v3.3.0/behat.phar -o /usr/bin/behat && chmod +x /usr/bin/behat && \
+    echo "alias behat='sudo -u apache behat'" >> /root/.bashrc
 
 ADD typo3.ini /etc/php.d/99-typo3.ini
 ADD typo3.conf /etc/httpd/conf.d/typo3.conf

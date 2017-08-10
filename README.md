@@ -52,8 +52,13 @@ docker run -v/my/proj/dir:/var/www/site -p8080:80 -e TYPO3_CONTEXT=Development -
 
 ### In continuous integration
 
-Docker images provide fully working installations of [composer](https://deployer.org/) and [deployer](https://deployer.org/) cli tools that can be used in Continous Integration pipelines. 
-[PHPUnit](https://phpunit.de/) and [BeHat](http://behat.org) support for unit and behavioural testing is planned.
+Docker images provide the following tools that can be used in CI/CD pipelines:
+
+* [composer](https://deployer.org/) dependency manager
+* [phing](https://www.phing.info/) build system
+* [PHPUnit](https://phpunit.de/) testing framework
+* [BeHat](http://behat.org) behavior-driven development framework
+* [deployer](https://deployer.org/) deployment tool
 
 ### In a production context
 
