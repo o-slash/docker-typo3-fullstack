@@ -16,6 +16,7 @@ all: default
 $(VERSIONS):
 	cp -f typo3.ini $@
 	cp -f typo3.conf $@
+	cp -f phpenv.sh $@ 
 	cp -f run-typo3.sh $@ 
 	cp -f entrypoint.sh $@ 
 	@docker build \
