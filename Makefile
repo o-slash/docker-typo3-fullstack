@@ -17,6 +17,7 @@ $(VERSIONS):
 	cp -f typo3.ini $@
 	cp -f typo3.conf $@
 	cp -f run-typo3.sh $@ 
+	cp -f entrypoint.sh $@ 
 	@docker build \
 		--build-arg VCS_REF=`git rev-parse --short HEAD` \
 		--build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \

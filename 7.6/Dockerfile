@@ -48,8 +48,11 @@ RUN yum update -y --setopt=tsflags=nodocs --nogpgcheck && \
 
 ADD typo3.ini /etc/php.d/99-typo3.ini
 ADD typo3.conf /etc/httpd/conf.d/typo3.conf
+ADD entrypoint.sh /usr/bin/entrypoint.sh
 ADD run-typo3.sh /usr/bin/run-typo3.sh
+RUN chmod +x /usr/bin/entrypoint.sh
 RUN chmod +x /usr/bin/run-typo3.sh
 
 EXPOSE 80
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["run-typo3.sh" ]
