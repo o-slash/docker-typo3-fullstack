@@ -41,7 +41,7 @@ RUN yum update -y --setopt=tsflags=nodocs && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     mkdir -p /var/www/.composer && chown -R apache:apache /var/www/.composer && chmod -R ugo+rwX,o-w /var/www/.composer && \
     echo "alias composer='sudo -u apache COMPOSER_HOME=$COMPOSER_HOME composer'" >> /root/.bashrc && \
-    curl -sSL https://deployer.org/releases/v4.3.1/deployer.phar -o /usr/bin/deployer && chmod +x /usr/bin/deployer
+    curl -sSL https://deployer.org/releases/v4.3.1/deployer.phar -o /usr/bin/dep && chmod +x /usr/bin/dep
 
 ADD typo3.ini /etc/php.d/99-typo3.ini
 ADD typo3.conf /etc/httpd/conf.d/typo3.conf
