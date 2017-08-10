@@ -74,6 +74,6 @@ WORKDIR /var/www/site
 
 This repository offers the following image tags:
 
-* `8.7`, `8.7-latest` whith support for Typo3 in `8.7.*` branch.
-* `7.6`, `7.6-latest` whith support for Typo3 in `7.6.*` branch.
-* `6.2`, `6.2-latest` whith support for Typo3 in `6.2.*` branch.
+* `8.7`, `8.7-latest` with support for Typo3 in `8.7.*` branch.
+* `7.6`, `7.6-latest` with support for Typo3 in `7.6.*` branch.
+* `6.2`, `6.2-latest` with support for Typo3 in `6.2.*` branch.
