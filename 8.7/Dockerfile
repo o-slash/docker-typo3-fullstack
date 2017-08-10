@@ -1,11 +1,12 @@
-ARG TYPO3_CONTEXT=Production
 FROM centos:7
 MAINTAINER Marco De Angelis <marco.deangelis@mulgo.org>
-ENV TYPO3_VERSION 8.7
+
+ARG TYPO3_VERSION=8.7
+ARG TYPO3_CONTEXT=Production
+ARG TYPO3_DOCROOT=web
 
 ARG BUILD_DATE
 ARG VCS_REF
-ARG TYPO3_CONTEXT
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Docker Typo3 Toolchain" \
@@ -22,7 +23,7 @@ ENV COMPOSER_HOME /var/www/.composer
 
 WORKDIR /var/www/site
 
-RUN yum update -y --setopt=tsflags=nodocs && \
+RUN yum update -y --setopt=tsflags=nodocs --nogpgcheck && \
     yum install -y --setopt=tsflags=nodocs --nogpgcheck https://centos7.iuscommunity.org/ius-release.rpm && \
     yum install -y --setopt=tsflags=nodocs --nogpgcheck \
       sudo \
@@ -35,9 +36,10 @@ RUN yum update -y --setopt=tsflags=nodocs && \
       php71u-xml \
       php71u-json \
       php71u-mbstring \
+      php71u-process \
       GraphicsMagick && \
     yum clean all && \
-    mkdir -p /var/www/site/web && chown -R apache:apache /var/www/site && chmod -R ugo+rwX,o-w /var/www/site && \
+    mkdir -p /var/www/site/$TYPO3_DOCROOT && chown -R apache:apache /var/www/site && chmod -R ugo+rwX,o-w /var/www/site && \
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer && \
     mkdir -p /var/www/.composer && chown -R apache:apache /var/www/.composer && chmod -R ugo+rwX,o-w /var/www/.composer && \
     echo "alias composer='sudo -u apache COMPOSER_HOME=$COMPOSER_HOME composer'" >> /root/.bashrc && \
