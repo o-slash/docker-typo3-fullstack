@@ -62,13 +62,15 @@ Docker images provide the following tools that can be used in CI/CD pipelines:
 
 ### In a production context
 
-You can build production images just copying your source code in the working directory. Here is a minimal Dockerfile doing just that.
+You can build production images copying your source code in the working directory as in the following Dockerfile.
 
 ```Dockerfile
 FROM mulgo/typo3-toolchain:8.7
 COPY . /var/www/site
 WORKDIR /var/www/site
 ```
+
+**Attention! This images are not ready for production and are shipped with many development dependencies. You definitely want to add more commands in your Dockerfile to fix that.**
 
 ## Available tags
 
