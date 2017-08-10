@@ -1,5 +1,6 @@
 # Typo3 Toolchain in Docker
 [![GitHub version](https://badge.fury.io/gh/o-slash%2Fdocker-typo3-toolchain.svg)](https://badge.fury.io/gh/o-slash%2Fdocker-typo3-toolchain) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Docker images in this repository provide tools and dependencies for development, continuous integration and production stages for Typo3 based websites. **They doesn't cointain Typo3 code which has to be installed via composer**.
 
 ## Basic usage
