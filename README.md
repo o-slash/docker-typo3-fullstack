@@ -44,7 +44,7 @@ To start you need a directory with at least a fully configured *composer.json* f
 
 Note the ```"web-dir": "web"``` directive which is important.
 
-Now you can have a brand new Typo3 installation ready for development at http://localhost:8080 just with:
+Now you can have a brand new Typo3 installation ready for development at <http://localhost:8080> just with:
 
 ```bash
 docker run -v/my/proj/dir:/var/www/site -p8080:80 -e TYPO3_CONTEXT=Development --rm -it mulgo/typo3-toolchain:8.7-latest
@@ -74,6 +74,6 @@ WORKDIR /var/www/site
 
 This repository offers the following image tags:
 
-- `8.7`, `8.7-latest` whith support for Typo3 in `8.7.*` branch.
-- `7.6`, `7.6-latest` whith support for Typo3 in `7.6.*` branch.
-- `6.2`, `6.2-latest` whith support for Typo3 in `6.2.*` branch.
+* `8.7`, `8.7-latest` whith support for Typo3 in `8.7.*` branch.
+* `7.6`, `7.6-latest` whith support for Typo3 in `7.6.*` branch.
+* `6.2`, `6.2-latest` whith support for Typo3 in `6.2.*` branch.
